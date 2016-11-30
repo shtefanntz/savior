@@ -9,7 +9,7 @@
  */
 angular.module('yapp')
   .controller('MainCtrl', function ($scope, $location) {
-
+    $scope.c = 1;
     $scope.submit = function () {
 
       $location.path('/game');

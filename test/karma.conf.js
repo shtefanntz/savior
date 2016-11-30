@@ -1,5 +1,5 @@
 // Karma configuration
-module.exports = function(config) {
+module.exports = function (config) {
   'use strict';
 
   config.set({
@@ -30,7 +30,7 @@ module.exports = function(config) {
     ],
 
     // web server port
-    port: 8080,
+    port: 9006,
 
     // Start these browsers, currently available:
     // - Chrome
