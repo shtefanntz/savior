@@ -12,7 +12,7 @@ angular.module('yapp')
 
     $scope.submit = function () {
 
-      $location.path('/dashboard');
+      $location.path('/game');
 
       return false;
     }
