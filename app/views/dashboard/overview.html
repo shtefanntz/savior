@@ -2,13 +2,14 @@
 	<div class="jumbotron">
 		<div class="container text-center">
 
-			<h1 class="text-center">Guess <span>ZPAIZ</span></h1>
+			<h1 class="text-center">Guess <span ng-bind="mixedWord"></span></h1>
 
 			<form role="form" ng-submit="submit()">
 
 				<div class="form-content">
 					<div class="form-group">
-						<input type="text" class="form-control input-underline input-lg" style="width:auto;margin:auto" id="" placeholder="Enter the correct word">
+						<input type="text" ng-keydown="evaluate($event)" class="form-control input-underline input-lg" style="width:auto;margin:auto"
+							placeholder="Enter the correct word">
 					</div>
 				</div>
 

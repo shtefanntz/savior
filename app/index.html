@@ -50,6 +50,7 @@
   <script src="../bower_components/angular-mocks/angular-mocks.js"></script>
   <script src="../bower_components/ui-router/release/angular-ui-router.js"></script>
   <script src="../bower_components/angular-animate/angular-animate.js"></script>
+  <script src="../bower_components/lodash/lodash.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -57,7 +58,23 @@
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/main.js"></script>
   <script src="scripts/controllers/dashboard.js"></script>
+  <script src="scripts/services/ShufflingService.js"></script>
+  <script src="scripts/services/ScoringService.js"></script>
+  <script src="scripts/controllers/dashboard.js"></script>
   <!-- endbuild -->
+
+  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDhj61SbyImJmYX47I6-ofzCrOKE4PKofk",
+      authDomain: "savior-a07a3.firebaseapp.com",
+      databaseURL: "https://savior-a07a3.firebaseio.com",
+      storageBucket: "savior-a07a3.appspot.com",
+      messagingSenderId: "78844146773"
+    };
+    firebase.initializeApp(config);
+  </script>
 </body>
 
 </html>
