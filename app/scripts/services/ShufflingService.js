@@ -21,7 +21,13 @@ angular.module('yapp')
             return letters.join("");
         }
 
+        function getRandomWordFromBag(words) {
+            var index = Math.floor((Math.random() * words.length));
+            return words[index];
+        }
+
         return {
-            shuffle: shuffleLetters
+            shuffle: shuffleLetters,
+            getRandomWordFromBag: getRandomWordFromBag
         }
     });

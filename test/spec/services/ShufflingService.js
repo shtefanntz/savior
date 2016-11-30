@@ -18,11 +18,5 @@ describe('Shuffling service - ', function () {
                 expect(actual).not.toBe("pizza");
             }
         });
-
-        it('should return an output different than the input ', function () {
-            var actual = sut.shuffle("pizza")
-
-            expect(actual).not.toBe("pizza")
-        });
     });
 });
