@@ -29,21 +29,10 @@ angular.module('yapp')
         function startGame(username) {
             currentPlayer = username;
 
-            userInfoPromise = firebase.database().ref('/user/' + username).once('value').then(function(data) {
-                var info = data.val();
-                if (info === null) {
-                    userInfo = {
-                        previousScores: [],
-                        userName: currentPlayer
-                    };
-                    firebase.database().ref('/user/' + username).set(JSON.stringify(userInfo))
-                } else {
-                    userInfo = JSON.parse(info)
-                }
-
-                return userInfo;
-            });
-
+            //firebase.database().ref('/user/' + username).set(JSON.stringify(userInfo))
+            userInfo = {
+                name: currentPlayer
+            }
             $location.path('/game');
         }
 
@@ -54,10 +43,45 @@ angular.module('yapp')
             return wordsPromise
         }
 
+        function getHighscores() {
+            return firebase.database().ref('/highscores').once('value').then(function(data) {
+                var json = data.val();
+                if (json === null) {
+                    return [];
+                }
+
+                return JSON.parse(data.val());
+            })
+        }
+
+        function registerHighscore(entry) {
+            return firebase.database().ref('/highscores').once('value').then(function(data) {
+                var json = data.val(),
+                    highscores;
+                if (json === null) {
+                    var base = {};
+                    base[entry.name] = entry.score;
+                    firebase.database().ref('/highscores').set(JSON.stringify(base))
+                } else {
+                    highscores = JSON.parse(json);
+                    if (!!highscores[entry.name]) {
+                        if (highscores[entry.name].score < entry.score) {
+                            highscores[entry.name] = entry.score
+                            firebase.database().ref('/highscores').set(JSON.stringify(highscores))
+                        }
+                    } else {
+                        highscores[entry.name] = entry.score
+                        firebase.database().ref('/highscores').set(JSON.stringify(highscores))
+                    }
+                }
+            })
+        }
         return {
             initialize: initialize,
             startGame: startGame,
-            getUserInfo: function() { return userInfoPromise; },
-            getWords: getWords
+            getUserInfo: function() { return userInfo; },
+            getWords: getWords,
+            getHighscores: getHighscores,
+            registerHighscore: registerHighscore
         }
     });

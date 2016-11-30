@@ -3,8 +3,9 @@
 		<div class="container">
 			<h1>Hall of fame</h1>
 			<ol>
-				<li>Stefan</li>
-				<li>Mark</li>
+				<li ng-repeat="entry in games">
+					<h3>{{entry.name}} - {{entry.score}}</h3>
+				</li>
 			</ol>
 		</div>
 	</div>

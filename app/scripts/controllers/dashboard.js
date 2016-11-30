@@ -8,19 +8,33 @@
  * Controller of yapp
  */
 angular.module('yapp')
-  .controller('DashboardCtrl', function ($scope, $state, $location, ShufflingService, GameService, ScoringService) {
+  .controller('DashboardCtrl', function ($timeout, $scope, $state, $location, ShufflingService, GameService, ScoringService) {
     var words,
         baseWord,
-        userInput;
-
-    $scope.userInput = []
-    GameService.getWords().then(function(data){
-        words = data
-    }).then(function(){
+        userInput = [],
+        score = [],
+        userInfo = GameService.getUserInfo();
+    
+    function initialize(){
+      userInput = []
       baseWord = ShufflingService.getRandomWordFromBag(words);
       $scope.mixedWord = ShufflingService.shuffle(baseWord);
+      $scope.userInput = {value: ''};
       $scope.$apply();
-    })
+    }
+
+    function resetGame(){
+      score = []
+      $scope.gameStarted = false;
+    }
+    if(!userInfo) {
+      $location.path('/main')
+    }
+
+    GameService.getWords().then(function(data){
+        words = data
+    }).then(initialize)
+
 
     
     $scope.submit = function () {
@@ -29,11 +43,43 @@ angular.module('yapp')
     }
 
     $scope.evaluate = function(ev){
-        $scope.userInput.push(ev.key)
-        if(ScoringService.inputIsCorrect(baseWord, $scope.userInput)){
-          alert("da!")
+        userInput.push(ev.key)
+        if(ScoringService.inputIsCorrect(baseWord, userInput)){
+            score.push(ScoringService.calculateScore(baseWord, userInput));
+            initialize();
        }
     }
+
+    $scope.start = function(){
+      $scope.gameStarted = true;
+
+      $timeout(function(){
+        alert('your score: ' + _.sum(score)) 
+        GameService.registerHighscore({
+          name: userInfo.name,
+          score: _.sum(score)
+        })
+        resetGame()       
+      }, 10000)
+    }
+
+
+  })
+  .controller('HighscoreCtrl', function($scope, GameService){
+    GameService.getHighscores().then(function(data){
+        $scope.games = _
+          .chain(Object.keys(data))
+          .map(function(key){
+            return {
+              name: key,
+              score: data[key]
+            }
+          })
+          .orderBy('score', ['desc'])
+          .value();
+
+        $scope.$apply();
+    })
   })
   .controller('ResultCtrl', function ($scope, $location) {
     $scope.goToHighscores = function () {

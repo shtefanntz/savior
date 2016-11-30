@@ -55,7 +55,8 @@ angular
       .state('highscore', {
         url: '/highscore',
         parent: 'game',
-        templateUrl: 'views/dashboard/highscore.html'
+        templateUrl: 'views/dashboard/highscore.html',
+        controller: 'HighscoreCtrl'
       });
 
   });
