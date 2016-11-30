@@ -18,5 +18,15 @@ describe('Shuffling service - ', function () {
                 expect(actual).not.toBe("pizza");
             }
         });
+
+        it('should not break for a one letter word', function () {
+            var actual = sut.shuffle("a");
+            expect(actual).toBe("a");
+        })
+
+        it('should always return the reversed word if there word is made of two letters', function () {
+            var actual = sut.shuffle("to");
+            expect(actual).toBe("ot");
+        })
     });
 });

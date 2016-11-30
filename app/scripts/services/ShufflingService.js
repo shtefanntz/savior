@@ -1,7 +1,7 @@
 'use strict';
 angular.module('yapp')
     .service('ShufflingService', function () {
-        function shuffleLetters(word) {
+        function tryShuffle(word) {
             var letters = word.split(""),
                 count = letters.length;
 
@@ -11,14 +11,18 @@ angular.module('yapp')
                 letters[i] = letters[j];
                 letters[j] = tmp;
             }
-            var result = letters.join("");
+            return letters.join("");
+        }
 
-            if (result === word) {
+        function shuffleLetters(word) {
+            var result = tryShuffle(word)
+
+            if (result === word && word.length > 1) {
                 return shuffleLetters(word)
                 // and hope that by the time this runs in production
-                // tail calls optimizations are added in the browsers :)
+                // tail calls optimizations are added in mainstream browsers :)
             }
-            return letters.join("");
+            return result;
         }
 
         function getRandomWordFromBag(words) {

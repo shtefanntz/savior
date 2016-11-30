@@ -7,7 +7,7 @@ angular.module('yapp')
             pow = Math.pow,
             backspace = 'Backspace';
         function calculateScore(expectedWord, userInput) {
-            if (!Array.isArray(userInput)) {
+            if (!_.isArray(userInput)) {
                 return 0;
             }
 
