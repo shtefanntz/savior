@@ -1,0 +1,13 @@
+<div>
+	<div class="jumbotron">
+		<div class="container" ng-if="games.length > 0">
+			<h1>Hall of fame</h1>
+			<ol>
+				<li ng-repeat="entry in games">
+					<h3>{{entry.name}} - {{entry.score}}</h3>
+				</li>
+			</ol>
+		</div>
+		<h1 ng-if="games.length == 0">Be the first to play the game!</h1>
+	</div>
+</div>
