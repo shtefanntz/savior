@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('yapp')
-    .service('GameService', function($http, $location, Repository) {
+    .service('GameService', function ($location, Repository) {
         var currentPlayer = "",
             userInfo,
             wordsPromise,
             userInfoPromise;
-        
+
         function initialize() {
             wordsPromise = Repository.getWords()
         }
@@ -31,19 +31,19 @@ angular.module('yapp')
 
         function registerHighscore(entry) {
             return Repository.getHighscores()
-                .then(function(highscores){
+                .then(function (highscores) {
                     var newScoreIsBetter = !!highscores[entry.name] && highscores[entry.name] < entry.score,
                         firstGamePlayed = !highscores[entry.name]
                     if (newScoreIsBetter || firstGamePlayed) {
                         highscores[entry.name] = entry.score
                         Repository.saveHighscore(highscores);
-                    } 
+                    }
                 })
         }
         return {
             initialize: initialize,
             startGame: startGame,
-            getUserInfo: function() { return userInfo; },
+            getUserInfo: function () { return userInfo; },
             getWords: getWords,
             getHighscores: Repository.getHighscores,
             registerHighscore: registerHighscore

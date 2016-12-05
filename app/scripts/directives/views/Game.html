@@ -1,0 +1,7 @@
+<div class="container text-center" ng-show="gameStarted">
+    <h1 class="text-center">Guess <span ng-bind="currentWord.mixedWord"></span></h1>
+    <sav-main-input score="score" signal-initialization="initializeWord()" base-word="currentWord.baseWord" />
+</div>
+<div class="text-center" ng-show="!gameStarted">
+    <button type="button" ng-click="start()" class="btn btn-white btn-outline btn-lg btn-rounded">Start!</button>
+</div>
