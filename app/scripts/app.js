@@ -13,7 +13,7 @@ angular
     'ui.router',
     'ngAnimate'
   ])
-  .constant('gameTimeSpanInMiliseconds', 10000)
+  .constant('gameTimeSpanInMiliseconds', 40000)
   .config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.when('/game', '/game/overview');
