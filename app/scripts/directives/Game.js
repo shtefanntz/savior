@@ -3,7 +3,8 @@
 angular.module('yapp')
     .controller('savGameCtrl', function ($timeout, $scope, $location, ShufflingService, GameService, gameTimeSpanInMiliseconds) {
         var words,
-            score = [];
+            score = [],
+            timer;
 
         $scope.score = [];
         $scope.initializeWord = initializeWord;
@@ -31,7 +32,7 @@ angular.module('yapp')
         function startGame() {
             $scope.gameStarted = true;
 
-            $timeout(function () {
+            timer = $timeout(function () {
                 alert('Time is up! Your score: ' + _.sum($scope.score))
                 GameService.registerHighscore({
                     name: $scope.username,
@@ -41,6 +42,12 @@ angular.module('yapp')
                 $scope.$broadcast('gameHasStarted')
             }, gameTimeSpanInMiliseconds)
         }
+
+        $scope.$on("$destroy", function () {
+            if (!!timer) {
+                $timeout.cancel(timer);
+            }
+        });
     })
     .directive('savGame', function () {
         return {
