@@ -1,18 +1,1 @@
-<div>
-	<div class="jumbotron">
-		<div class="container text-center" ng-show="gameStarted">
-
-			<h1 class="text-center">Guess <span ng-bind="mixedWord"></span></h1>
-
-			<div class="form-content">
-				<div class="form-group">
-					<input type="text" autofocus ng-keyup="evaluate($event)" class="form-control input-underline input-lg" style="width:auto;margin:auto"
-						ng-model="userInput.value" placeholder="Enter the correct word">
-				</div>
-			</div>
-		</div>
-		<div class="text-center">
-			<button type="button" ng-show="!gameStarted" ng-click="start()" class="btn btn-white btn-outline btn-lg btn-rounded">Start!</button>
-		</div>
-	</div>
-</div>
+<div> <div class=jumbotron> <div class="container text-center" ng-show=gameStarted> <h1 class=text-center>Guess <span ng-bind=mixedWord></span></h1> <div class=form-content> <div class=form-group> <input type=text autofocus ng-keyup=evaluate($event) class="form-control input-underline input-lg" style=width:auto;margin:auto ng-model=userInput.value placeholder="Enter the correct word"> </div> </div> </div> <div class=text-center> <button type=button ng-show=!gameStarted ng-click=start() class="btn btn-white btn-outline btn-lg btn-rounded">Start!</button> </div> </div> </div>
